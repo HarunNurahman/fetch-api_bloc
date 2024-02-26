@@ -1,3 +1,7 @@
+import 'package:fetch_api_bloc/bloc/live_games_bloc.dart';
+import 'package:fetch_api_bloc/cubit/genre_cubit.dart';
+import 'package:fetch_api_bloc/pages/home_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,11 +13,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LiveGamesBloc()),
+        BlocProvider(create: (context) => GenreCubit())
+      ],
+      child: const MaterialApp(
+        home: HomePage(),
       ),
     );
   }
