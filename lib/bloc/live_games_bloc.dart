@@ -39,29 +39,5 @@ class LiveGamesBloc extends Bloc<LiveGamesEvent, LiveGamesState> {
 
       emit(LiveGamesLoaded(games));
     });
-
-    // on<OnSaveGames>((event, emit) {
-    //   emit(LiveGamesLoading());
-
-    //   final games = (state as LiveGamesLoaded).games;
-    //   GameModel selectedGame = event.game.copyWith(isSaved: true);
-
-    //   int index = games.indexWhere((element) => element.id == selectedGame.id);
-    //   games[index] = selectedGame;
-
-    //   emit(LiveGamesLoaded(games));
-    // });
-
-    // on<OnDeleteGames>((event, emit) {
-    //   emit(LiveGamesLoading());
-
-    //   final games = (state as LiveGamesLoaded).games;
-    //   GameModel selectedGame = event.game.copyWith(isSaved: false);
-
-    //   int index = games.indexWhere((element) => element.id == selectedGame.id);
-    //   games[index] = selectedGame;
-
-    //   emit(LiveGamesLoaded(games));
-    // });
   }
 }
