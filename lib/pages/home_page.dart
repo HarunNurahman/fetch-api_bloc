@@ -1,7 +1,7 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:fetch_api_bloc/bloc/live_games_bloc.dart';
 import 'package:fetch_api_bloc/cubit/genre_cubit.dart';
 import 'package:fetch_api_bloc/models/game_model.dart';
+import 'package:fetch_api_bloc/pages/widgets/game_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -110,38 +110,19 @@ class _HomePageState extends State<HomePage> {
                             ),
                             itemBuilder: (context, index) {
                               GameModel game = list[index];
-                              return Stack(
-                                children: [
-                                  Positioned.fill(
-                                    child: ExtendedImage.network(
-                                      game.thumbnail!,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  Positioned.fill(
-                                    child: DecoratedBox(
-                                      decoration: const BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment.bottomCenter,
-                                          end: Alignment(0, -0.3),
-                                          colors: [
-                                            Colors.black,
-                                            Colors.transparent,
-                                          ],
-                                        ),
-                                      ),
-                                      child: Container(
-                                        alignment: Alignment.bottomLeft,
-                                        padding: const EdgeInsets.all(8),
-                                        child: Text(
-                                          game.title ?? "",
-                                          style: const TextStyle(
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              return GameItems(
+                                game: game,
+                                ontap: () {
+                                  if (game.isSaved) {
+                                    context
+                                        .read<LiveGamesBloc>()
+                                        .add(OnDeleteGames(game));
+                                  } else {
+                                    context
+                                        .read<LiveGamesBloc>()
+                                        .add(OnSaveGames(game));
+                                  }
+                                },
                               );
                             },
                           ),

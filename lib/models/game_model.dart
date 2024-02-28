@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class GameModel {
   final int? id;
   final String? title;
@@ -10,6 +11,7 @@ class GameModel {
   final String? developer;
   final DateTime? releaseDate;
   final String? freetogameProfileUrl;
+  final bool isSaved;
 
   GameModel({
     this.id,
@@ -23,6 +25,7 @@ class GameModel {
     this.developer,
     this.releaseDate,
     this.freetogameProfileUrl,
+    this.isSaved = false,
   });
 
   factory GameModel.fromJson(Map<String, dynamic> json) => GameModel(
@@ -55,4 +58,34 @@ class GameModel {
             "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}",
         "freetogame_profile_url": freetogameProfileUrl,
       };
+
+  GameModel copyWith({
+    int? id,
+    String? title,
+    String? thumbnail,
+    String? shortDescription,
+    String? gameUrl,
+    String? genre,
+    String? platform,
+    String? publisher,
+    String? developer,
+    DateTime? releaseDate,
+    String? freetogameProfileUrl,
+    bool? isSaved,
+  }) {
+    return GameModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      thumbnail: thumbnail ?? this.thumbnail,
+      shortDescription: shortDescription ?? this.shortDescription,
+      gameUrl: gameUrl ?? this.gameUrl,
+      genre: genre ?? this.genre,
+      platform: platform ?? this.platform,
+      publisher: publisher ?? this.publisher,
+      developer: developer ?? this.developer,
+      releaseDate: releaseDate ?? this.releaseDate,
+      freetogameProfileUrl: freetogameProfileUrl ?? this.freetogameProfileUrl,
+      isSaved: isSaved ?? this.isSaved,
+    );
+  }
 }
